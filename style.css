@@ -1,0 +1,290 @@
+:root {
+  --primary-bg: #58353a;
+  --accent-red: #e01e37;
+  --accent-gold: #ffb703;
+  --text-glow: #ff4d6d;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent; /* For OBS Overlay */
+  /* background-color: #1a1a1a; Debug background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: "Cinzel", serif;
+}
+
+.scene-container {
+  position: relative;
+  width: 600px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Magic Circle --- */
+.magic-circle-container {
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+
+.magic-circle-container.active {
+    animation: summonCircle 1.5s ease-out forwards;
+}
+
+.rune-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--accent-red);
+  box-shadow:
+    0 0 15px var(--accent-red),
+    inset 0 0 10px var(--accent-red);
+}
+
+.rune-circle.inner {
+  width: 100px;
+  height: 100px;
+  border-style: solid;
+  animation: rotateLeft 3s linear infinite;
+}
+
+.rune-circle.outer {
+  width: 200px;
+  height: 200px;
+  border-style: dashed;
+  border-width: 4px;
+  animation: rotateRight 5s linear infinite;
+}
+
+/* --- Content Box --- */
+.content-box {
+    position: relative;
+    /* Subtle gradient for Mana Flow */
+    background: linear-gradient(135deg, var(--primary-bg) 25%, #6d2a35 50%, var(--primary-bg) 75%);
+    background-size: 200% 200%;
+    padding: 20px 40px;
+    border: 4px solid var(--accent-gold);
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: scale(0.5);
+    /* Reduced brightness/glow */
+    box-shadow: 
+        0 0 0 3px var(--accent-red),
+        0 0 15px var(--accent-red);
+    z-index: 10;
+    
+    /* Fixed Size & Centering */
+    width: 500px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Padding includes in width */
+}
+
+.content-box.reveal {
+    animation: 
+        boxReveal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        manaFlow 4s ease infinite,
+        magicalPulse 3s ease-in-out infinite alternate;
+}
+
+.content-box.hiding {
+    opacity: 1; /* Start from visible */
+    animation: boxExit 0.5s ease-in forwards;
+}
+
+.content-box.reveal {
+  animation: boxReveal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.label {
+  font-family: "Cinzel", serif;
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.username {
+    position: relative;
+    font-size: 3rem;
+    font-family: "Cinzel", cursive;
+    text-transform: uppercase;
+    
+    /* Text Shine / Swap Light Effect */
+    background: linear-gradient(110deg, #fff 30%, #ffd700 50%, #fff 70%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+    
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+    
+    /* 5s total: ~1.5s shine, ~3.5s pause */
+    animation: textShine 5s linear infinite;
+    
+    /* Simplified shadow for legibility */
+    filter: drop-shadow(2px 2px 0px #000) drop-shadow(0 0 5px var(--accent-red));
+}
+
+/* --- Explosion Particles --- */
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--accent-gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* --- Animations --- */
+
+@keyframes summonCircle {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.2) rotate(270deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5) rotate(360deg);
+    display: none;
+  }
+}
+
+@keyframes rotateRight {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateLeft {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes boxReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.1) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(5deg);
+  }
+  70% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes particleExplosion {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Shake Effect for the whole screen during explosion */
+.shake {
+  animation: shakeAnim 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shakeAnim {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+/* --- Idle Animations --- */
+
+@keyframes manaFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes magicalPulse {
+    0% {
+        box-shadow: 
+            0 0 0 3px var(--accent-red),
+            0 0 10px var(--accent-red);
+    }
+    100% {
+        box-shadow: 
+            0 0 0 3px var(--accent-red),
+            0 0 20px var(--accent-red),
+            0 0 10px var(--text-glow);
+    }
+}
+
+@keyframes textShine {
+    0% {
+        background-position: 200% center;
+    }
+    40% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+
+@keyframes boxExit {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.5); }
+}
