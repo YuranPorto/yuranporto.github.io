@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createExplosion() {
     const particleCount = 50;
-    const colors = ["#E01E37", "#FFB703", "#FFFFFF", "#58353A"];
+    const colors = ["#bc00dd", "#e5b3fe", "#FFFFFF", "#2d0036"];
 
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement("div");

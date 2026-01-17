@@ -1,8 +1,8 @@
 :root {
-  --primary-bg: #58353a;
-  --accent-red: #e01e37;
-  --accent-gold: #ffb703;
-  --text-glow: #ff4d6d;
+  --primary-bg: #2d0036;
+  --accent-red: #bc00dd;
+  --accent-gold: #e5b3fe;
+  --text-glow: #f94dff;
 }
 
 body {
@@ -133,7 +133,7 @@ body {
   text-transform: uppercase;
 
   /* Text Shine / Swap Light Effect */
-  background: linear-gradient(110deg, #fff 45%, #ffd700 50%, #fff 55%);
+  background: linear-gradient(110deg, #fff 45%, #ab04ff 50%, #fff 55%);
   background-size: 250% auto;
   background-clip: text;
   -webkit-background-clip: text;
