@@ -30,17 +30,17 @@ body {
 
 /* --- Magic Circle --- */
 .magic-circle-container {
-    position: absolute;
-    width: 0;
-    height: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
 }
 
 .magic-circle-container.active {
-    animation: summonCircle 1.5s ease-out forwards;
+  animation: summonCircle 1.5s ease-out forwards;
 }
 
 .rune-circle {
@@ -69,43 +69,48 @@ body {
 
 /* --- Content Box --- */
 .content-box {
-    position: relative;
-    /* Subtle gradient for Mana Flow */
-    background: linear-gradient(135deg, var(--primary-bg) 25%, #6d2a35 50%, var(--primary-bg) 75%);
-    background-size: 200% 200%;
-    padding: 20px 40px;
-    border: 4px solid var(--accent-gold);
-    border-radius: 15px;
-    text-align: center;
-    color: white;
-    opacity: 0;
-    transform: scale(0.5);
-    /* Reduced brightness/glow */
-    box-shadow: 
-        0 0 0 3px var(--accent-red),
-        0 0 15px var(--accent-red);
-    z-index: 10;
-    
-    /* Fixed Size & Centering */
-    width: 500px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box; /* Padding includes in width */
+  position: relative;
+  /* Subtle gradient for Mana Flow */
+  background: linear-gradient(
+    135deg,
+    var(--primary-bg) 25%,
+    #6d2a35 50%,
+    var(--primary-bg) 75%
+  );
+  background-size: 200% 200%;
+  padding: 20px 40px;
+  border: 4px solid var(--accent-gold);
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  opacity: 0;
+  transform: scale(0.5);
+  /* Reduced brightness/glow */
+  box-shadow:
+    0 0 0 3px var(--accent-red),
+    0 0 15px var(--accent-red);
+  z-index: 10;
+
+  /* Fixed Size & Centering */
+  width: 500px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Padding includes in width */
 }
 
 .content-box.reveal {
-    animation: 
-        boxReveal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-        manaFlow 4s ease infinite,
-        magicalPulse 3s ease-in-out infinite alternate;
+  animation:
+    boxReveal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+    manaFlow 4s ease infinite,
+    magicalPulse 3s ease-in-out infinite alternate;
 }
 
 .content-box.hiding {
-    opacity: 1; /* Start from visible */
-    animation: boxExit 0.5s ease-in forwards;
+  opacity: 1; /* Start from visible */
+  animation: boxExit 0.5s ease-in forwards;
 }
 
 .content-box.reveal {
@@ -122,27 +127,24 @@ body {
 }
 
 .username {
-    position: relative;
-    font-size: 3rem;
-    font-family: "Cinzel", cursive;
-    text-transform: uppercase;
-    
-    /* Text Shine / Swap Light Effect */
-    background: linear-gradient(110deg, #fff 30%, #ffd700 50%, #fff 70%);
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent; /* Fallback */
-    
-    -webkit-text-fill-color: transparent;
-    color: transparent; /* Fallback */
-    
-    /* 5s total: ~1.5s shine, ~3.5s pause */
-    animation: textShine 5s linear infinite;
-    
-    /* Simplified shadow for legibility */
-    filter: drop-shadow(2px 2px 0px #000) drop-shadow(0 0 5px var(--accent-red));
+  position: relative;
+  font-size: 3rem;
+  font-family: "Cinzel", cursive;
+  text-transform: uppercase;
+
+  /* Text Shine / Swap Light Effect */
+  background: linear-gradient(110deg, #fff 45%, #ffd700 50%, #fff 55%);
+  background-size: 250% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+
+  /* Continuous fluid animation - Slower */
+  animation: textShine 8s linear infinite;
+
+  /* Simplified shadow for legibility */
+  filter: drop-shadow(2px 2px 0px #000) drop-shadow(0 0 5px var(--accent-red));
 }
 
 /* --- Explosion Particles --- */
@@ -253,38 +255,45 @@ body {
 /* --- Idle Animations --- */
 
 @keyframes manaFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes magicalPulse {
-    0% {
-        box-shadow: 
-            0 0 0 3px var(--accent-red),
-            0 0 10px var(--accent-red);
-    }
-    100% {
-        box-shadow: 
-            0 0 0 3px var(--accent-red),
-            0 0 20px var(--accent-red),
-            0 0 10px var(--text-glow);
-    }
+  0% {
+    box-shadow:
+      0 0 0 3px var(--accent-red),
+      0 0 10px var(--accent-red);
+  }
+  100% {
+    box-shadow:
+      0 0 0 3px var(--accent-red),
+      0 0 20px var(--accent-red),
+      0 0 10px var(--text-glow);
+  }
 }
 
 @keyframes textShine {
-    0% {
-        background-position: 200% center;
-    }
-    40% {
-        background-position: -200% center;
-    }
-    100% {
-        background-position: -200% center;
-    }
+  to {
+    background-position: -250% center;
+  }
 }
 
+
 @keyframes boxExit {
-    0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.5); }
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
 }
